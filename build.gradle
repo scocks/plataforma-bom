@@ -1,0 +1,38 @@
+plugins {
+    id 'java-platform'
+}
+
+javaPlatform {
+    allowDependencies()
+}
+
+dependencies {
+    constraints {
+        api 'org.libDep1:libDep1:1.1-SNAPSHOT'
+        api 'org.libDep2:libDep2:1.0-SNAPSHOT'
+        api 'org.libDep3:libDep3:1.0-SNAPSHOT'
+        api 'org.libDep4:libDep4:1.0-SNAPSHOT'
+        api 'org.libDep5:libDep5:1.0-SNAPSHOT'
+    }
+}
+
+group = 'org.plataforma-bom'
+version = '1.0.0'
+
+publishing {
+    publications {
+        bom(MavenPublication) {
+            from components.javaPlatform
+        }
+    }
+    repositories {
+        maven {
+            name 'nexus'
+            url "https://nexus.kingq12024.sa-demo.beescloud.com/repository/maven-snapshots/"
+            credentials {
+                username project.repoUser
+                password project.repoPassword
+            }
+        }
+    }
+}
