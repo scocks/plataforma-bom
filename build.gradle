@@ -20,7 +20,7 @@ dependencies {
 }
 
 group = 'org.king.plataforma-bom'
-version = '1.0.2'
+version = '1.0.2-SNAPSHOT'
 
 publishing {
     publications {
@@ -31,7 +31,7 @@ publishing {
     repositories {
         maven {
             name 'nexus'
-            url "https://nexus.kingq12024.sa-demo.beescloud.com/repository/maven-releases/"
+            url "https://nexus.kingq12024.sa-demo.beescloud.com/repository/maven-snapshots/"
             credentials {
                 username project.repoUser
                 password project.repoPassword
