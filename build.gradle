@@ -1,8 +1,7 @@
 plugins {
     id 'java-platform'
+    id 'maven-publish'
 }
-
-apply plugin: 'maven-publish'
 
 javaPlatform {
     allowDependencies()
@@ -15,7 +14,7 @@ dependencies {
         api 'org.king.libDep3:lib-dep-3:1.0-SNAPSHOT'
         api 'org.king.libDep4:lib-dep-4:1.0-SNAPSHOT'
         api 'org.king.libDep5:lib-dep-5:1.0-SNAPSHOT'
-        api 'org.king.plataforma:plataforma:1.1-SNAPSHOT'
+        api 'org.king.plataforma:plataforma:1.0-SNAPSHOT'
     }
 }
 
