@@ -19,7 +19,7 @@ dependencies {
 }
 
 group = 'org.king.plataforma-bom'
-version = '1.0.2-SNAPSHOT'
+version = '1.0.0-SNAPSHOT'
 
 publishing {
     publications {
