@@ -15,24 +15,7 @@ pipeline {
             """
         }
     }
-    stages {
-        stage('Clone Repo') {
-            steps {
-                git (url: "git@github.com:scocks/plataforma-bom.git", credentialsId: "scocks", branch: "main")
-            }
-        }
-        stage('Generate Properties') {
-            steps {
-                container('jdk17') {                    
-                    withCredentials([usernamePassword(credentialsId: 'nexus-admin-cred', passwordVariable: 'repoPassword', usernameVariable: 'repoUser')]) {
-                       sh """
-                       echo "repoUser=${repoUser}" > gradle.properties
-                       echo "repoPassword=${repoPassword}" >> gradle.properties
-                       """
-                    }
-                }
-            }
-        }
+    stages {               
         stage('Build and Test') {
             steps {
                 container('jdk17') {                                        
