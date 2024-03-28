@@ -25,7 +25,7 @@ pipeline {
     stages {     
         stage('Clone') {
             steps {
-                git credentialsId: 'scocks', url: 'git@github.com:scocks/plataforma-bom.git' branch: "${params.branch}"
+                git credentialsId: 'scocks', url: 'git@github.com:scocks/plataforma-bom.git', branch: "${params.branch}"
             }
         }          
         stage('Build and Test') {
