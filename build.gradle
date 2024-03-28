@@ -8,13 +8,8 @@ javaPlatform {
     allowDependencies()
 }
 
-def versions = tasks.loadVersions.versionProperties
-
-def loadVersion() {
-    def properties = new Properties()
-    file("version.properties").withInputStream { properties.load(it) }
-    return properties['version']
-}
+def versions = tasks.loadVersions.versions
+def versions = tasks.loadVersion.version
 
 dependencies {
     constraints {
@@ -25,6 +20,12 @@ dependencies {
         api "org.king.libDep5:lib-dep-5:${versions['lib-dep-5']}"
         api "org.king.plataforma:plataforma:${versions['plataforma']}"
     }
+}
+
+def loadVersion() {
+    def properties = new Properties()
+    file("version.properties").withInputStream { properties.load(it) }
+    return properties['version']
 }
 
 group = 'org.king.plataforma-bom'
