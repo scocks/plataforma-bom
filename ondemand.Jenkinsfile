@@ -1,6 +1,6 @@
 properties([
     parameters([        
-        string(name: 'branch', defaultValue: '', description: 'branch to build')
+        string(name: 'branch', defaultValue: 'main', description: 'branch to build')
     ])
 ])
 
