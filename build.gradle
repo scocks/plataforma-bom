@@ -7,14 +7,22 @@ javaPlatform {
     allowDependencies()
 }
 
+def loadProperties() {
+    def properties = new Properties()
+    file("versions.properties").withInputStream { properties.load(it) }
+    return properties
+}
+
+def versions = loadProperties()
+
 dependencies {
     constraints {
-        api 'org.king.libDep1:lib-dep-1:1.0-SNAPSHOT'
-        api 'org.king.libDep2:lib-dep-2:1.0-SNAPSHOT'
-        api 'org.king.libDep3:lib-dep-3:1.0-SNAPSHOT'
-        api 'org.king.libDep4:lib-dep-4:1.0-SNAPSHOT'
-        api 'org.king.libDep5:lib-dep-5:1.0-SNAPSHOT'
-        api 'org.king.plataforma:plataforma:1.0-SNAPSHOT'
+        api "org.king.libDep1:lib-dep-1:${versions['lib-dep-1']}"
+        api "org.king.libDep2:lib-dep-2:${versions['lib-dep-2']}"
+        api "org.king.libDep3:lib-dep-3:${versions['lib-dep-3']}"
+        api "org.king.libDep4:lib-dep-4:${versions['lib-dep-4']}"
+        api "org.king.libDep5:lib-dep-5:${versions['lib-dep-5']}"
+        api "org.king.plataforma:plataforma:${versions['plataforma']}"
     }
 }
 
