@@ -1,19 +1,14 @@
 plugins {
     id 'java-platform'
     id 'maven-publish'
+    id 'org.king.version' version "1.0-SNAPSHOT"
 }
 
 javaPlatform {
     allowDependencies()
 }
 
-def loadProperties() {
-    def properties = new Properties()
-    file("versions.properties").withInputStream { properties.load(it) }
-    return properties
-}
-
-def versions = loadProperties()
+def versions = tasks.loadVersions.versionProperties
 
 def loadVersion() {
     def properties = new Properties()

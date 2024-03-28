@@ -1,2 +1,10 @@
-rootProject.name = 'plataforma-bom'
+pluginManagement {
+    repositories {
+        mavenCentral() // For Maven Central
+        maven {
+            url "https://nexus.kingq12024.sa-demo.beescloud.com/repository/maven-snapshots/"
+        }
+    }
+}
 
+rootProject.name = 'plataforma-bom'
