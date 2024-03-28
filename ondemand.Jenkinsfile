@@ -1,3 +1,10 @@
+properties([
+    parameters([        
+        string(name: 'branch', defaultValue: '', description: 'branch to build')
+    ])
+])
+
+
 pipeline {
    agent {
         kubernetes {
@@ -18,7 +25,7 @@ pipeline {
     stages {     
         stage('Clone') {
             steps {
-                git credentialsId: 'scocks', url: 'git@github.com:scocks/plataforma-bom.git'
+                git credentialsId: 'scocks', url: 'git@github.com:scocks/plataforma-bom.git' branch: "${params.branch}"
             }
         }          
         stage('Build and Test') {
