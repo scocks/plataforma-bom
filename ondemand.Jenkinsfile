@@ -4,7 +4,6 @@ properties([
     ])
 ])
 
-
 pipeline {
    agent {
         kubernetes {
@@ -27,7 +26,19 @@ pipeline {
             steps {
                 git credentialsId: 'scocks', url: 'git@github.com:scocks/plataforma-bom.git', branch: "${params.branch}"
             }
-        }          
+        }   
+        stage('Generate Properties') {
+            steps {
+                container('jdk17') {                    
+                    withCredentials([usernamePassword(credentialsId: 'nexus-admin-cred', passwordVariable: 'repoPassword', usernameVariable: 'repoUser')]) {
+                       sh """
+                       echo "repoUser=${repoUser}" > gradle.properties
+                       echo "repoPassword=${repoPassword}" >> gradle.properties
+                       """
+                    }
+                }
+            }
+        }       
         stage('Build and Test') {
             steps {
                 container('jdk17') {                                        
