@@ -21,8 +21,6 @@ def loadVersion() {
     return properties['version']
 }
 
-def bomversion = loadVersion()
-
 dependencies {
     constraints {
         api "org.king.libDep1:lib-dep-1:${versions['lib-dep-1']}"
@@ -35,7 +33,7 @@ dependencies {
 }
 
 group = 'org.king.plataforma-bom'
-version = "${bomversion}"
+version = "${loadVersion()}"
 
 publishing {
     publications {
