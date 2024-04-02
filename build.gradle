@@ -8,28 +8,19 @@ javaPlatform {
     allowDependencies()
 }
 
-def versions = tasks.loadVersions.versions
-def versions = tasks.loadVersion.version
-
 dependencies {
     constraints {
-        api "org.king.libDep1:lib-dep-1:${versions['lib-dep-1']}"
-        api "org.king.libDep2:lib-dep-2:${versions['lib-dep-2']}"
-        api "org.king.libDep3:lib-dep-3:${versions['lib-dep-3']}"
-        api "org.king.libDep4:lib-dep-4:${versions['lib-dep-4']}"
-        api "org.king.libDep5:lib-dep-5:${versions['lib-dep-5']}"
-        api "org.king.plataforma:plataforma:${versions['plataforma']}"
+        api "org.king.libDep1:lib-dep-1:${project.versionProps['lib-dep-1']}"
+        api "org.king.libDep2:lib-dep-2:${project.versionProps['lib-dep-2']}"
+        api "org.king.libDep3:lib-dep-3:${project.versionProps['lib-dep-3']}"
+        api "org.king.libDep4:lib-dep-4:${project.versionProps['lib-dep-4']}"
+        api "org.king.libDep5:lib-dep-5:${project.versionProps['lib-dep-5']}"
+        api "org.king.plataforma:plataforma:${project.versionProps['plataforma']}"
     }
 }
 
-def loadVersion() {
-    def properties = new Properties()
-    file("version.properties").withInputStream { properties.load(it) }
-    return properties['version']
-}
-
 group = 'org.king.plataforma-bom'
-version = "${loadVersion()}"
+version = "${project.versionProperty}"
 
 publishing {
     publications {
@@ -46,5 +37,12 @@ publishing {
                 password project.repoPassword
             }
         }
+    }
+}
+
+task showVersionProps {
+    dependsOn readVersionProperties
+    doLast {
+        println project.versionProps
     }
 }
