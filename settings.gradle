@@ -1,9 +1,19 @@
 pluginManagement {
     repositories {
         mavenCentral() // For Maven Central
+        gradlePluginPortal()
         maven {
             url "https://nexus.kingq12024.sa-demo.beescloud.com/repository/maven-snapshots/"
         }
+    }
+}
+
+buildscript {
+    repositories {
+        gradlePluginPortal()
+    }
+    dependencies {
+        classpath("com.dipien:semantic-version-gradle-plugin:2.0.0")
     }
 }
 

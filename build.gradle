@@ -1,26 +1,32 @@
 plugins {
     id 'java-platform'
     id 'maven-publish'
-    id 'org.king.version' version "1.0-SNAPSHOT"
+    id "com.sidneysimmons.gradle-plugin-external-properties" version "2.0.1"        
 }
 
 javaPlatform {
     allowDependencies()
 }
 
+externalProperties {
+    propertiesFileResolver file("versions.properties")
+}
+
 dependencies {
     constraints {
-        api "org.king.libDep1:lib-dep-1:${project.versionProps['lib-dep-1']}"
-        api "org.king.libDep2:lib-dep-2:${project.versionProps['lib-dep-2']}"
-        api "org.king.libDep3:lib-dep-3:${project.versionProps['lib-dep-3']}"
-        api "org.king.libDep4:lib-dep-4:${project.versionProps['lib-dep-4']}"
-        api "org.king.libDep5:lib-dep-5:${project.versionProps['lib-dep-5']}"
-        api "org.king.plataforma:plataforma:${project.versionProps['plataforma']}"
+        api "org.king.libDep1:lib-dep-1:${props.get('lib-dep-1')}"
+        api "org.king.libDep2:lib-dep-2:${props.get('lib-dep-2')}"
+        api "org.king.libDep3:lib-dep-3:${props.get('lib-dep-3')}"
+        api "org.king.libDep4:lib-dep-4:${props.get('lib-dep-4')}"
+        api "org.king.libDep5:lib-dep-5:${props.get('lib-dep-5')}"
+        api "org.king.plataforma:plataforma:${props.get('plataforma')}"
     }
 }
 
 group = 'org.king.plataforma-bom'
-version = "${project.versionProperty}"
+version = "1.0.0-SNAPSHOT"
+
+apply plugin: "com.dipien.semantic-version"
 
 publishing {
     publications {
@@ -40,9 +46,15 @@ publishing {
     }
 }
 
-task showVersionProps {
-    dependsOn readVersionProperties
+task showVersionProps {    
     doLast {
-        println project.versionProps
+        println "lib-dep-1=${props.get('lib-dep-1')}"
+        println "lib-dep-2=${props.get('lib-dep-2')}"
+        println "lib-dep-3=${props.get('lib-dep-3')}"
+        println "lib-dep-4=${props.get('lib-dep-4')}"
+        println "lib-dep-5=${props.get('lib-dep-5')}"
+        println "lib-dep-5=${props.get('plataforma')}"
+        println "plataforma=${props.get('plataforma')}"
+        println "version=${version}"
     }
 }
