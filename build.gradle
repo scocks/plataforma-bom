@@ -53,7 +53,6 @@ task showVersionProps {
         println "lib-dep-3=${props.get('lib-dep-3')}"
         println "lib-dep-4=${props.get('lib-dep-4')}"
         println "lib-dep-5=${props.get('lib-dep-5')}"
-        println "lib-dep-5=${props.get('plataforma')}"
         println "plataforma=${props.get('plataforma')}"
         println "version=${version}"
     }
